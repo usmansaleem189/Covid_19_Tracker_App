@@ -39,8 +39,20 @@ const rows = [
 ];
 
 const useStyles = makeStyles({
+  tableContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    // borderTop: '500px',
+    marginTop: '50px'
+  },
   table: {
-    minWidth: 700,
+    // minWidth: 700,
+    // display: 'flex',
+    width: '60%',
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    // borderTop: '500px'
   },
 });
 
@@ -48,7 +60,7 @@ export function List() {
   const classes = useStyles();
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} className={classes.tableContainer}>
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>

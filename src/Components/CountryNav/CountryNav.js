@@ -21,25 +21,26 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function CountryNav() {
+export function CountryNav({countriesNameList, handleChange}) {
   const classes = useStyles();
   const [state, setState] = React.useState({
     age: '',
     name: 'hai',
   });
 
-  const handleChange = (event) => {
-    const name = event.target.name;
-    setState({
-      ...state,
-      [name]: event.target.value,
-    });
-  };
+  // const handleChange = (event) => {
+  //   const name = event.target.name;
+  //   setState({
+  //     ...state,
+  //     [name]: event.target.value,
+  //   });
+  // };
 
+  // console.log(countriesNameList);
   return (
     <div className={classes.container}>
       <FormControl variant="filled" className={classes.formControl}>
-        <InputLabel htmlFor="filled-age-native-simple" >Age</InputLabel>
+        <InputLabel htmlFor="filled-age-native-simple" >Select Country</InputLabel>
         <Select
           native
           value={state.age}
@@ -49,11 +50,15 @@ export function CountryNav() {
             name: 'age',
             id: 'filled-age-native-simple',
           }}
-        >
+        onChange = {(event)=> handleChange(event.target.value)}>
           <option aria-label="None" value="" />
-          <option value={10}>Ten</option>
-          <option value={20}>Twenty</option>
-          <option value={30}>Thirty</option>
+
+          {countriesNameList.map ((country,ind)=> {
+          return ( 
+          <option value={country} key={ind}>{country}</option>
+          )}
+          )}
+
         </Select>
       </FormControl>
     </div>
