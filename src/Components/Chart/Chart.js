@@ -1,5 +1,6 @@
 import React from "react";
-import { withStyles, makeStyles } from '@material-ui/core/styles';
+// import { withStyles, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import { Line } from "react-chartjs-2";
 import { Bar } from 'react-chartjs-2';
 import '../../App.css';
@@ -58,7 +59,7 @@ const useStyles = makeStyles({
 // }
 
 export function Chart({ dailyData, totalData }) {
-    const classes = useStyles();
+    // const classes = useStyles();
     // console.log(dailyGlobalData);
     // console.log(continentsArray);
 
