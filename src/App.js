@@ -4,7 +4,7 @@ import './App.css';
 import { Cards } from './Components/Cards/Cards';
 import { CountryNav } from './Components/CountryNav/CountryNav';
 import { Chart } from './Components/Chart/Chart';
-import { List } from './Components/List/List';
+// import { List } from './Components/List/List';
 import coronaimage from './images/image1.jpg'
 
 import {fetchTotalStats, fetchCountriesName, fetchData, fetchDailyCountryData} from '../src/api/api';

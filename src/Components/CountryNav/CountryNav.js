@@ -27,10 +27,10 @@ const useStyles = makeStyles((theme) => ({
 
 export function CountryNav({ countriesNameList, handleChange }) {
   const classes = useStyles();
-  const [state, setState] = React.useState({
-    age: '',
-    name: 'hai',
-  });
+  // const [state, setState] = React.useState({
+  //   age: '',
+  //   name: 'hai',
+  // });
 
   // const handleChange = (event) => {
   //   const name = event.target.name;

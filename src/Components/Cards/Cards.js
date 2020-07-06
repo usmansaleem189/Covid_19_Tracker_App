@@ -8,49 +8,44 @@ import '../../App.css';
 
 // import {fetchTotalStats} from '../../api/api'
 
-const useStyles = makeStyles({
+// const useStyles = makeStyles({
 
-    container: {
-        display: 'flex',
-        justifyContent: 'center',
-        margin: '50px 0'
+//     container: {
+//         display: 'flex',
+//         justifyContent: 'center',
+//         margin: '50px 0'
 
-    },
-    card_infected: {
-        minWidth: 275,
-        margin: '0 2%',
-        textAlign: 'center',
-        borderBottom: 'solid 10px red',
-        '@media (max-width: 600px)' : {
-            minWidth: '100%'
-          }
-    },
-    card_recovered: {
-        minWidth: 275,
-        margin: '0 2%',
-        textAlign: 'center',
-        borderBottom: 'solid 10px green'
-    },
-    card_deaths: {
-        minWidth: 275,
-        margin: '0 2%',
-        textAlign: 'center',
-        borderBottom: 'solid 10px black'
-    },
-    title: {
-        fontSize: 14,
-    },
-    pos: {
-        marginBottom: 12,
-    },
+//     },
+//     card_infected: {
+//         minWidth: 275,
+//         margin: '0 2%',
+//         textAlign: 'center',
+//         borderBottom: 'solid 10px red',
+//         '@media (max-width: 600px)' : {
+//             minWidth: '100%'
+//           }
+//     },
+//     card_recovered: {
+//         minWidth: 275,
+//         margin: '0 2%',
+//         textAlign: 'center',
+//         borderBottom: 'solid 10px green'
+//     },
+//     card_deaths: {
+//         minWidth: 275,
+//         margin: '0 2%',
+//         textAlign: 'center',
+//         borderBottom: 'solid 10px black'
+//     },
+//     title: {
+//         fontSize: 14,
+//     },
+//     pos: {
+//         marginBottom: 12,
+//     },
 
-    // '@media (max-width: 780px)' : {
-    //     container: {
-    //     width: '10%'
-    // }
-    //   }
 
-});
+// });
 
 export function Cards({data}) {
     
