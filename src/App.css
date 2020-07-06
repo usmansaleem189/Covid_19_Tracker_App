@@ -23,7 +23,7 @@
   display: block;
   margin: auto;
   object-fit: contain;
-  max-width: 90%;
+  width: 90%;
   height: auto;
   justify-content: center;
 
@@ -42,6 +42,7 @@
 
 .Chart-chart {
   width: 45%;
+  min-height: 600px;
   margin: 10px 0;
 }
 
