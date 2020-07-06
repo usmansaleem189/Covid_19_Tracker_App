@@ -83,9 +83,16 @@ export const fetchCountriesName = async () => {
         const response = await fetch("https://corona.lmao.ninja/v2/countries?yesterday&sort");
         let data = await response.json();
 
+        const response1 = await fetch("https://pomber.github.io/covid19/timeseries.json");
+        let data1 = await response1.json();
+
         let modifiedData = data.map(country => country.country);
-        console.log(modifiedData);
-        return modifiedData;
+        const filteredModifiedData = modifiedData.filter((name) => Object.keys(data1).includes(name));
+        // console.log(modifiedData);
+        // console.log(filteredModifiedData);
+        // return modifiedData;
+        return filteredModifiedData;
+
     } catch (error) {
         console.log(error);
     }
@@ -139,48 +146,86 @@ export const fetchContinentData = async () => {
 }
 
 
+// export const fetchDailyCountryData = async (country) => {
+    
+//     try {
+
+//         if (!country) {
+//             return fetchDailyGlobalData();
+//         }
+
+//         const response = await fetch("https://corona.lmao.ninja/v2/historical?lastdays=all");
+//         let data = await response.json();
+
+//         const filteredData = data.filter((data) => data.country === country)
+//         // console.log(filteredData)
+
+
+//         const dateArray = Object.keys(filteredData[0].timeline.cases);
+//         const casesArray = Object.values(filteredData[0].timeline.cases);
+//         const deathsArray = Object.values(filteredData[0].timeline.deaths);
+
+//         const modifiedData = [];
+
+//         var i;
+
+//         for (i = 0; i < dateArray.length; i++)
+//             modifiedData.push({
+//                 confirmed: casesArray[i],
+//                 deaths: deathsArray[i],
+//                 lastUpdate: dateArray[i]
+//             })
+
+//         // console.log(data);
+//         return modifiedData;
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
+
+
+
+
 export const fetchDailyCountryData = async (country) => {
+    
     try {
 
         if (!country) {
             return fetchDailyGlobalData();
         }
 
-        const response = await fetch("https://corona.lmao.ninja/v2/historical?lastdays=all");
-        let data = await response.json();
 
-        const filteredData = data.filter((data) => data.country === country)
-        console.log(filteredData)
-        // console.log(data.map(obj=>obj.country));
-        //*********************** */
+        const response1 = await fetch("https://pomber.github.io/covid19/timeseries.json");
+        let data1 = await response1.json();
+        const countryData = (data1[country]);
+        const modifiedData1 = countryData.map(obj => ({
+            confirmed: obj.confirmed,
+            deaths: obj.deaths,
+            lastUpdate: obj.date
+        }))
+        // console.log(Object.keys(data1));
+        return modifiedData1;
 
+        // const response = await fetch("https://corona.lmao.ninja/v2/historical?lastdays=all");
+        // let data = await response.json();
+        // const filteredData = data.filter((data) => data.country === country)
 
+        // const dateArray = Object.keys(filteredData[0].timeline.cases);
+        // const casesArray = Object.values(filteredData[0].timeline.cases);
+        // const deathsArray = Object.values(filteredData[0].timeline.deaths);
 
-        // let countryNames = data.map(data => data.country);
+        // const modifiedData = [];
 
-        // console.log(countryNames);
+        // var i;
 
+        // for (i = 0; i < dateArray.length; i++)
+        //     modifiedData.push({
+        //         confirmed: casesArray[i],
+        //         deaths: deathsArray[i],
+        //         lastUpdate: dateArray[i]
+        //     })
 
-        //************************** */
-
-
-        const dateArray = Object.keys(filteredData[0].timeline.cases);
-        const casesArray = Object.values(filteredData[0].timeline.cases);
-        const deathsArray = Object.values(filteredData[0].timeline.deaths);
-
-        const modifiedData = [];
-
-        var i;
-
-        for (i = 0; i < dateArray.length; i++)
-            modifiedData.push({
-                confirmed: casesArray[i],
-                deaths: deathsArray[i],
-                lastUpdate: dateArray[i]
-            })
-
-        // console.log(data);
-        return modifiedData;
+        // return modifiedData;
     } catch (error) {
         console.log(error);
     }

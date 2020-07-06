@@ -14,11 +14,15 @@ const useStyles = makeStyles((theme) => ({
 
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 250,
+    // minWidth: 250,
+    width: '20%'
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
+  NatControl: {
+    fontSize: 'x-large',
+},
 }));
 
 export function CountryNav({ countriesNameList, handleChange }) {
@@ -39,8 +43,8 @@ export function CountryNav({ countriesNameList, handleChange }) {
   // console.log(countriesNameList);
   return (
     <div className={classes.container}>
-      <FormControl variant="filled" className={classes.formControl}>
-        {/* <InputLabel>Select Country</InputLabel> */}
+      {/* <FormControl variant="filled" className={classes.formControl}>
+        // <InputLabel>Select Country</InputLabel>
         <Select
           native
           defaultvalue=""
@@ -55,9 +59,14 @@ export function CountryNav({ countriesNameList, handleChange }) {
           )}
 
         </Select>
+      </FormControl> */}
+
+      <FormControl className={classes.formControl}>
+        <NativeSelect defaultValue="" onChange={(e) => handleChange(e.target.value)} className={classes.NatControl}>
+          <option value="">Global</option>
+          {countriesNameList.map((country, i) => <option key={i} value={country}>{country}</option>)}
+        </NativeSelect>
       </FormControl>
-
-
 
 
     </div>
