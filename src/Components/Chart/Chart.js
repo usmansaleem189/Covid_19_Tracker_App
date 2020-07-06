@@ -2,22 +2,18 @@ import React from "react";
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import { Line } from "react-chartjs-2";
 import { Bar } from 'react-chartjs-2';
-
+import '../../App.css';
 
 const useStyles = makeStyles({
     chartContainer: {
         display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
+        justifyContent: 'space-around',
         marginTop: '50px',
-        width: '80%',
-        // backgroundColor: 'blue'
+        width: '90%',
     },
     chart: {
-        width: '90%',
-        // backgroundColor: 'green',
-        margin: '10px 0'
+        width: '45%',
+        margin: '10px 0',
     },
     Container: {
         display: 'flex',
@@ -61,25 +57,25 @@ const useStyles = makeStyles({
 //     ]
 // }
 
-export function Chart({dailyData, totalData}) {
+export function Chart({ dailyData, totalData }) {
     const classes = useStyles();
     // console.log(dailyGlobalData);
     // console.log(continentsArray);
 
 
     const data = {
-        labels: dailyData.map((data)=> data.lastUpdate),
+        labels: dailyData.map((data) => data.lastUpdate),
         datasets: [
             {
                 label: "Confirmed",
-                data: dailyData.map((data)=> data.confirmed),
+                data: dailyData.map((data) => data.confirmed),
                 fill: true,
                 backgroundColor: "rgba(75,192,192,0.2)",
                 borderColor: "rgba(75,192,192,1)"
             },
             {
                 label: "Deaths",
-                data: dailyData.map((data)=> data.deaths),
+                data: dailyData.map((data) => data.deaths),
                 fill: false,
                 borderColor: "#742774"
             }
@@ -89,52 +85,69 @@ export function Chart({dailyData, totalData}) {
 
 
     const barData = {
-        labels: totalData.map((data)=> data.name),
-    
+        labels: totalData.map((data) => data.name),
+
         datasets: [
             {
                 label: 'Cases',
                 backgroundColor: 'lightblue',
                 borderColor: 'rgba(0,0,0,1)',
                 borderWidth: 2,
-                data: totalData.map((data)=> data.cases)
+                data: totalData.map((data) => data.cases)
             },
             {
                 label: 'Recovered',
                 backgroundColor: 'lightgreen',
                 borderColor: 'rgba(0,0,0,1)',
                 borderWidth: 2,
-                data: totalData.map((data)=> data.recovered)
+                data: totalData.map((data) => data.recovered)
             },
             {
                 label: 'Deaths',
                 backgroundColor: 'lightred',
                 borderColor: 'rgba(0,0,0,1)',
                 borderWidth: 2,
-                data: totalData.map((data)=> data.deaths)
+                data: totalData.map((data) => data.deaths)
             }
         ]
     }
 
+// console.log(dailyData);
 
+    if (!dailyData[0] || (!totalData[0]))
+    {
+        return null;
+    }
 
     return (
-        <div className={classes.Container}>
-            <div className={classes.chartContainer}>
-                <div className={classes.chart}>
-                    <Line data={data} />
-                </div>
-                <div className={classes.chart}>
-                    <Bar data={barData}
+        <div className="Chart-Container">
+            <div className="Chart-chartContainer">
+                <div className="Chart-chart">
+                    <Line data={data}
                         options={{
                             title: {
                                 display: true,
-                                text: 'Covid-19 Statistics for each Continent',
+                                text:  `${dailyData[0].name}: Daily Data `,
                                 fontSize: 20
                             },
                             legend: {
                                 display: true,
-                                position: 'right'
+                                position: 'top',
+                            }
+                        }}
+                    />
+                </div>
+                <div className="Chart-chart">
+                    <Bar data={barData}
+                        options={{
+                            title: {
+                                display: true,
+                                text: `Covid-19 Statistics for ${totalData[0].title}`,
+                                fontSize: 20
+                            },
+                            legend: {
+                                display: true,
+                                position: 'top'
                             }
                         }}
                     />

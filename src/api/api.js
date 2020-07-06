@@ -28,10 +28,11 @@ export const fetchDailyGlobalData = async () => {
             confirmed: dailyData.totalConfirmed,
             // recovered: dailyData.totalRecovered,
             deaths: dailyData.deaths.total,
-            lastUpdate: dailyData.reportDate
+            lastUpdate: dailyData.reportDate,
+            name: "Global"
 
         }))
-        // console.log(modifiedData);
+        console.log(modifiedData[0].name);
         return modifiedData;
     } catch (error) {
         console.log(error);
@@ -106,6 +107,7 @@ export const fetchData = async (country) => {
 
         if (!country) {
             return fetchTotalStats();
+            // return fetchContinentData();
         }
 
         const response = await fetch("https://corona.lmao.ninja/v2/countries?yesterday&sort");
@@ -136,7 +138,8 @@ export const fetchContinentData = async () => {
             name: continent.continent,
             cases: continent.cases,
             deaths: continent.deaths,
-            recovered: continent.recovered
+            recovered: continent.recovered,
+            title: "All Continents"
         }))
         // console.log(modifiedData);
         return modifiedData;
@@ -201,9 +204,11 @@ export const fetchDailyCountryData = async (country) => {
         const modifiedData1 = countryData.map(obj => ({
             confirmed: obj.confirmed,
             deaths: obj.deaths,
-            lastUpdate: obj.date
+            lastUpdate: obj.date,
+            name: country
         }))
         // console.log(Object.keys(data1));
+        console.log(modifiedData1[0].name);
         return modifiedData1;
 
         // const response = await fetch("https://corona.lmao.ninja/v2/historical?lastdays=all");

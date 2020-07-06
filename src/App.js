@@ -5,6 +5,7 @@ import { Cards } from './Components/Cards/Cards';
 import { CountryNav } from './Components/CountryNav/CountryNav';
 import { Chart } from './Components/Chart/Chart';
 import { List } from './Components/List/List';
+import coronaimage from './images/image1.jpg'
 
 import {fetchTotalStats, fetchCountriesName, fetchData, fetchDailyCountryData} from '../src/api/api';
 import {fetchDailyGlobalData, fetchContinentData} from '../src/api/api';
@@ -65,9 +66,13 @@ const handleChange = async (country) => {
     name: country,
     cases: getData.confirmed,
     deaths: getData.deaths,
-    recovered: getData.recovered
+    recovered: getData.recovered,
+    title: country
   })
-  setTotalData (barChartData);
+  const barChartDataContinent = await fetchContinentData();
+
+
+  setTotalData ((!country)?barChartDataContinent:barChartData);
 
 }
 
@@ -81,18 +86,12 @@ const handleChange = async (country) => {
 
 
   return (
-    <div>
+    <div className="App">
+      <img src={coronaimage} alt="Covid-19" className="App-logo"/>
       <Cards data={state} />
       <CountryNav countriesNameList={countryNames} handleChange={handleChange}/>
       <Chart dailyData={dailyData} totalData={totalData}/>
-      {/* <List /> */}
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
+      <h1>Stay Home Stay Safe</h1>
     </div>
   );
 }

@@ -41,6 +41,10 @@ export function CountryNav({ countriesNameList, handleChange }) {
   // };
 
   // console.log(countriesNameList);
+  if (!countriesNameList[0]){
+    return null;
+  }
+
   return (
     <div className={classes.container}>
       {/* <FormControl variant="filled" className={classes.formControl}>

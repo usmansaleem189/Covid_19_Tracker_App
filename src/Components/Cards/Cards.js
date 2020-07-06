@@ -4,6 +4,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import CountUp from 'react-countup';
+import '../../App.css';
 
 // import {fetchTotalStats} from '../../api/api'
 
@@ -19,19 +20,22 @@ const useStyles = makeStyles({
         minWidth: 275,
         margin: '0 2%',
         textAlign: 'center',
-        borderBottom: 'double red',
+        borderBottom: 'solid 10px red',
+        '@media (max-width: 600px)' : {
+            minWidth: '100%'
+          }
     },
     card_recovered: {
         minWidth: 275,
         margin: '0 2%',
         textAlign: 'center',
-        borderBottom: 'double green'
+        borderBottom: 'solid 10px green'
     },
     card_deaths: {
         minWidth: 275,
         margin: '0 2%',
         textAlign: 'center',
-        borderBottom: 'double black'
+        borderBottom: 'solid 10px black'
     },
     title: {
         fontSize: 14,
@@ -39,6 +43,13 @@ const useStyles = makeStyles({
     pos: {
         marginBottom: 12,
     },
+
+    // '@media (max-width: 780px)' : {
+    //     container: {
+    //     width: '10%'
+    // }
+    //   }
+
 });
 
 export function Cards({data}) {
@@ -85,60 +96,60 @@ export function Cards({data}) {
     }
 
     return (
-        <div className={classes.container}>
+        <div className="Cards-container">
             
             {/* {console.log(confirmed.value)};
             {console.log(recovered.value)};
             {console.log(deaths.value)};
             {console.log(lastUpdate)}; */}
 
-            <Card className={classes.card_infected}>
+            <Card className="Cards-card_infected">
                 <CardContent>
-                    <Typography className={classes.title} color="textSecondary" gutterBottom>
+                    <Typography className="Cards-title" color="textSecondary" gutterBottom>
                         Infected
                     </Typography>
                     <Typography variant="h4" component="h2">
                         <CountUp start={0} end={data.confirmed} duration={2} separator="," />
                         {/* {totalData.confirmed.value} */}
                     </Typography>
-                    <Typography className={classes.pos} color="textSecondary">
+                    <Typography className="Cards-pos" color="textSecondary">
                     {new Date(data.lastUpdate).toDateString()}
                     </Typography>
-                    <Typography className={classes.pos} >
+                    <Typography className="Cards-pos" >
                         Number of active cases of COVID-19
                     </Typography>
                 </CardContent>
             </Card>
             {/* {console.log(confirmed.value)} */}
-            <Card className={classes.card_recovered}>
+            <Card className="Cards-card_recovered">
                 <CardContent>
-                    <Typography className={classes.title} color="textSecondary" gutterBottom>
+                    <Typography className="Cards-title" color="textSecondary" gutterBottom>
                         Recovered
                     </Typography>
                     <Typography variant="h4" component="h2">
                         <CountUp start={0} end={data.recovered} duration={2} separator="," />
                     </Typography>
-                    <Typography className={classes.pos} color="textSecondary">
+                    <Typography className="Cards-pos" color="textSecondary">
                     {new Date(data.lastUpdate).toDateString()}
                     </Typography>
-                    <Typography className={classes.pos} >
+                    <Typography className="Cards-pos" >
                         Number of recoveries from COVID-19
                     </Typography>
                 </CardContent>
             </Card>
 
-            <Card className={classes.card_deaths}>
+            <Card className="Cards-card_deaths">
                 <CardContent>
-                    <Typography className={classes.title} color="textSecondary" gutterBottom>
+                    <Typography className="Cards-title" color="textSecondary" gutterBottom>
                         Deaths
                     </Typography>
                     <Typography variant="h4" component="h2">
                         <CountUp start={0} end={data.deaths} duration={2} separator="," />
                     </Typography>
-                    <Typography className={classes.pos} color="textSecondary">
+                    <Typography className="Cards-pos" color="textSecondary">
                         {new Date(data.lastUpdate).toDateString()}
                     </Typography>
-                    <Typography className={classes.pos} >
+                    <Typography className="Cards-pos" >
                         Number of deaths caused by COVID-19
                     </Typography>
                 </CardContent>
