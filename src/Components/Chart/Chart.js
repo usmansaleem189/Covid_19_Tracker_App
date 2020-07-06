@@ -101,7 +101,9 @@ export function Chart({ dailyData, totalData }) {
                             legend: {
                                 display: true,
                                 position: 'top',
-                            }
+                            },
+                            responsive: true,
+                            maintainAspectRatio: false,
                         }}
                     />
                 </div>
@@ -116,7 +118,9 @@ export function Chart({ dailyData, totalData }) {
                             legend: {
                                 display: true,
                                 position: 'top'
-                            }
+                            },
+                            responsive: true,
+                            maintainAspectRatio: false,
                         }}
                     />
                 </div>
