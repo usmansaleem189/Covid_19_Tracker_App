@@ -48,9 +48,9 @@ export const fetchTotalStats = async () => {
         // console.log(data);
 
         const modifiedData = {
-            confirmed: data.confirmed,
-            recovered: data.recovered,
-            deaths: data.deaths,
+            confirmed: data.confirmed.value,
+            recovered: data.recovered.value,
+            deaths: data.deaths.value,
             lastUpdate: data.lastUpdate
         }
 
@@ -84,7 +84,7 @@ export const fetchCountriesName = async () => {
         let data = await response.json();
 
         let modifiedData = data.map(country => country.country);
-        // console.log(modifiedData);
+        console.log(modifiedData);
         return modifiedData;
     } catch (error) {
         console.log(error);
@@ -95,33 +95,28 @@ export const fetchCountriesName = async () => {
 
 export const fetchData = async (country) => {
 
-try {
-    const response = await fetch("https://corona.lmao.ninja/v2/countries?yesterday&sort");
-    let data = await response.json();
-    // console.log(data);
-    // console.log(country);
-    const filteredData = data.filter((obj)=>(obj.country === country));
-    const requiredData = {
-        confirmed: filteredData[0].cases,
-        recovered: filteredData[0].recovered,
-        deaths: filteredData[0].deaths,
-        lastUpdate: filteredData[0].updated
+    try {
+
+        if (!country) {
+            return fetchTotalStats();
+        }
+
+        const response = await fetch("https://corona.lmao.ninja/v2/countries?yesterday&sort");
+        let data = await response.json();
+        // console.log(data);
+        // console.log(country);
+        const filteredData = data.filter((obj) => (obj.country === country));
+        const requiredData = {
+            confirmed: filteredData[0].cases,
+            recovered: filteredData[0].recovered,
+            deaths: filteredData[0].deaths,
+            lastUpdate: filteredData[0].updated
+        }
+        // console.log(requiredData);
+        return requiredData;
+    } catch (error) {
     }
-return requiredData;
-} catch (error) {
-    
 }
-
-
-}
-
-
-
-
-
-
-
-
 
 
 
@@ -137,6 +132,54 @@ export const fetchContinentData = async () => {
             recovered: continent.recovered
         }))
         // console.log(modifiedData);
+        return modifiedData;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+export const fetchDailyCountryData = async (country) => {
+    try {
+
+        if (!country) {
+            return fetchDailyGlobalData();
+        }
+
+        const response = await fetch("https://corona.lmao.ninja/v2/historical?lastdays=all");
+        let data = await response.json();
+
+        const filteredData = data.filter((data) => data.country === country)
+        console.log(filteredData)
+        // console.log(data.map(obj=>obj.country));
+        //*********************** */
+
+
+
+        // let countryNames = data.map(data => data.country);
+
+        // console.log(countryNames);
+
+
+        //************************** */
+
+
+        const dateArray = Object.keys(filteredData[0].timeline.cases);
+        const casesArray = Object.values(filteredData[0].timeline.cases);
+        const deathsArray = Object.values(filteredData[0].timeline.deaths);
+
+        const modifiedData = [];
+
+        var i;
+
+        for (i = 0; i < dateArray.length; i++)
+            modifiedData.push({
+                confirmed: casesArray[i],
+                deaths: deathsArray[i],
+                lastUpdate: dateArray[i]
+            })
+
+        // console.log(data);
         return modifiedData;
     } catch (error) {
         console.log(error);

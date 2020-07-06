@@ -61,25 +61,25 @@ const useStyles = makeStyles({
 //     ]
 // }
 
-export function Chart({dailyGlobalData, continentsArray}) {
+export function Chart({dailyData, totalData}) {
     const classes = useStyles();
     // console.log(dailyGlobalData);
     // console.log(continentsArray);
 
 
     const data = {
-        labels: dailyGlobalData.map((dailyData)=> dailyData.lastUpdate),
+        labels: dailyData.map((data)=> data.lastUpdate),
         datasets: [
             {
                 label: "Confirmed",
-                data: dailyGlobalData.map((dailyData)=> dailyData.confirmed),
+                data: dailyData.map((data)=> data.confirmed),
                 fill: true,
                 backgroundColor: "rgba(75,192,192,0.2)",
                 borderColor: "rgba(75,192,192,1)"
             },
             {
                 label: "Deaths",
-                data: dailyGlobalData.map((dailyData)=> dailyData.deaths),
+                data: dailyData.map((data)=> data.deaths),
                 fill: false,
                 borderColor: "#742774"
             }
@@ -89,7 +89,7 @@ export function Chart({dailyGlobalData, continentsArray}) {
 
 
     const barData = {
-        labels: continentsArray.map((continent)=> continent.name),
+        labels: totalData.map((data)=> data.name),
     
         datasets: [
             {
@@ -97,21 +97,21 @@ export function Chart({dailyGlobalData, continentsArray}) {
                 backgroundColor: 'lightblue',
                 borderColor: 'rgba(0,0,0,1)',
                 borderWidth: 2,
-                data: continentsArray.map((continent)=> continent.cases)
+                data: totalData.map((data)=> data.cases)
             },
             {
                 label: 'Recovered',
                 backgroundColor: 'lightgreen',
                 borderColor: 'rgba(0,0,0,1)',
                 borderWidth: 2,
-                data: continentsArray.map((continent)=> continent.recovered)
+                data: totalData.map((data)=> data.recovered)
             },
             {
                 label: 'Deaths',
                 backgroundColor: 'lightred',
                 borderColor: 'rgba(0,0,0,1)',
                 borderWidth: 2,
-                data: continentsArray.map((continent)=> continent.deaths)
+                data: totalData.map((data)=> data.deaths)
             }
         ]
     }

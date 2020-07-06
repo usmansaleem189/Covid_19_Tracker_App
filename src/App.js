@@ -6,23 +6,22 @@ import { CountryNav } from './Components/CountryNav/CountryNav';
 import { Chart } from './Components/Chart/Chart';
 import { List } from './Components/List/List';
 
-import {fetchTotalStats, fetchCountriesName, fetchData} from '../src/api/api';
+import {fetchTotalStats, fetchCountriesName, fetchData, fetchDailyCountryData} from '../src/api/api';
 import {fetchDailyGlobalData, fetchContinentData} from '../src/api/api';
 
 function App() {
 
-const [state, setState] = useState({data:{}, country:''});
+const [state, setState] = useState({});
 const [countryNames, setCountryNames] = useState([]);
-const [globalData, setGlobalData] = useState([]);
-const [continentsArray, setContinentArray] = useState([]);
-
+const [dailyData, setDailyData] = useState([]);
+const [totalData, setTotalData] = useState([]);
 
 
 useEffect(() => {
   const getTotalStats = async () => {
     const acquiredData = await fetchTotalStats();
-    setState({data: acquiredData});
-     console.log(acquiredData)
+    setState(acquiredData);
+    //  console.log(acquiredData)
   }
   const getCountriesNames = async () => {
       const countriesNameList = await fetchCountriesName();
@@ -31,15 +30,17 @@ useEffect(() => {
   }
   const getDailyGlobalData = async () =>{
     const dailyGlobalData = await fetchDailyGlobalData();
-    setGlobalData(dailyGlobalData);
+    setDailyData(dailyGlobalData);
     // console.log(dailyGlobalData)
   }
 
   const getContinentData = async () => {
   const continentsData = await fetchContinentData();
-    setContinentArray (continentsData);
+    setTotalData (continentsData);
     // console.log(continentsData)
   }
+
+
 
   getTotalStats();
   getCountriesNames();
@@ -51,25 +52,47 @@ useEffect(() => {
 
 const handleChange = async (country) => {
   const getData = await fetchData(country);
-  console.log(getData);
-  //setState({data: getData});
+  // console.log(getData);
+  setState(getData);
+
+
+  const getDailyCountryData = await fetchDailyCountryData(country);
+  setDailyData(getDailyCountryData);
+  // console.log(getDailyCountryData);
+
+  const barChartData=[];
+  barChartData.push({
+    name: country,
+    cases: getData.confirmed,
+    deaths: getData.deaths,
+    recovered: getData.recovered
+  })
+  setTotalData (barChartData);
+
 }
 
 
 
 
 
-const {data, country} = state;
+// const {data, country} = state;
 
 
 
 
   return (
     <div>
-      <Cards data={data} />
+      <Cards data={state} />
       <CountryNav countriesNameList={countryNames} handleChange={handleChange}/>
-      <Chart dailyGlobalData={globalData} continentsArray={continentsArray}/>
+      <Chart dailyData={dailyData} totalData={totalData}/>
       {/* <List /> */}
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
     </div>
   );
 }

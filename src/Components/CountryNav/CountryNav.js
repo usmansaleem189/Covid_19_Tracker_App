@@ -8,8 +8,8 @@ import NativeSelect from '@material-ui/core/NativeSelect';
 
 const useStyles = makeStyles((theme) => ({
   container: {
-      display: 'flex',
-      justifyContent: 'center' ,
+    display: 'flex',
+    justifyContent: 'center',
   },
 
   formControl: {
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function CountryNav({countriesNameList, handleChange}) {
+export function CountryNav({ countriesNameList, handleChange }) {
   const classes = useStyles();
   const [state, setState] = React.useState({
     age: '',
@@ -40,18 +40,13 @@ export function CountryNav({countriesNameList, handleChange}) {
   return (
     <div className={classes.container}>
       <FormControl variant="filled" className={classes.formControl}>
-        <InputLabel htmlFor="filled-age-native-simple" >Select Country</InputLabel>
+        {/* <InputLabel>Select Country</InputLabel> */}
         <Select
           native
-          value={state.age}
-          onChange={handleChange}
-          label="Age"
-          inputProps={{
-            name: 'age',
-            id: 'filled-age-native-simple',
-          }}
+          defaultvalue=""
         onChange = {(event)=> handleChange(event.target.value)}>
-          <option aria-label="None" value="" />
+          
+          <option aria-label="None" value="">Global</option> 
 
           {countriesNameList.map ((country,ind)=> {
           return ( 
@@ -61,6 +56,10 @@ export function CountryNav({countriesNameList, handleChange}) {
 
         </Select>
       </FormControl>
+
+
+
+
     </div>
   );
 }

@@ -41,7 +41,7 @@ const useStyles = makeStyles({
     },
 });
 
-export function Cards({data:{confirmed,recovered, deaths, lastUpdate}}) {
+export function Cards({data}) {
     
     
     const classes = useStyles();
@@ -76,7 +76,7 @@ export function Cards({data:{confirmed,recovered, deaths, lastUpdate}}) {
     // const {confirmed, recovered, deaths, lastUpdate} = totalData;
     // console.log(confirmed.value);
 
-    if (!confirmed) {
+    if (!data.confirmed) {
         return(
             <div>
                 <p>Loading...</p>
@@ -98,11 +98,11 @@ export function Cards({data:{confirmed,recovered, deaths, lastUpdate}}) {
                         Infected
                     </Typography>
                     <Typography variant="h4" component="h2">
-                        <CountUp start={0} end={confirmed.value} duration={2} separator="," />
+                        <CountUp start={0} end={data.confirmed} duration={2} separator="," />
                         {/* {totalData.confirmed.value} */}
                     </Typography>
                     <Typography className={classes.pos} color="textSecondary">
-                    {new Date(lastUpdate).toDateString()}
+                    {new Date(data.lastUpdate).toDateString()}
                     </Typography>
                     <Typography className={classes.pos} >
                         Number of active cases of COVID-19
@@ -116,10 +116,10 @@ export function Cards({data:{confirmed,recovered, deaths, lastUpdate}}) {
                         Recovered
                     </Typography>
                     <Typography variant="h4" component="h2">
-                        <CountUp start={0} end={recovered.value} duration={2} separator="," />
+                        <CountUp start={0} end={data.recovered} duration={2} separator="," />
                     </Typography>
                     <Typography className={classes.pos} color="textSecondary">
-                    {new Date(lastUpdate).toDateString()}
+                    {new Date(data.lastUpdate).toDateString()}
                     </Typography>
                     <Typography className={classes.pos} >
                         Number of recoveries from COVID-19
@@ -133,10 +133,10 @@ export function Cards({data:{confirmed,recovered, deaths, lastUpdate}}) {
                         Deaths
                     </Typography>
                     <Typography variant="h4" component="h2">
-                        <CountUp start={0} end={deaths.value} duration={2} separator="," />
+                        <CountUp start={0} end={data.deaths} duration={2} separator="," />
                     </Typography>
                     <Typography className={classes.pos} color="textSecondary">
-                        {new Date(lastUpdate).toDateString()}
+                        {new Date(data.lastUpdate).toDateString()}
                     </Typography>
                     <Typography className={classes.pos} >
                         Number of deaths caused by COVID-19
